@@ -1,4 +1,9 @@
-package 'apache2' do
+if node['platform_family'] == "rhel"
+   package="httpd"
+elsif node['platform_family'] == "debian"
+   package="apache2"
+end
+package package do
    action :install
 end
 
