@@ -1,6 +1,10 @@
-package 'postgresql-server' do
+package 'postgresql' do
     action :install
-    notifies :run,'execute[postgresql-init]'
+    notifies :run,'execute[postgresql-init]',:immediately
+end
+
+service 'postgresql' do
+      action [:enable,:start]
 end
 
 execute 'postgresql-init' do
@@ -8,6 +12,3 @@ execute 'postgresql-init' do
       action :nothing
 end
 
-service 'postgresql' do
-      action [:enable,:start]
-end
